@@ -14,11 +14,11 @@ public struct FeedItem: Equatable {
     let imageUrl: URL
     
     public init(id: UUID, description: String?,
-                location: String?, imageURL: URL) {
+                location: String?, imageUrl: URL) {
         self.id = id
         self.description = description
         self.location = location
-        self.imageUrl = imageURL
+        self.imageUrl = imageUrl
     }
 }
 
@@ -27,6 +27,6 @@ extension FeedItem: Decodable {
         case id
         case description
         case location
-        case imageURL = "image"
+        case imageUrl = "image"
     }
 }

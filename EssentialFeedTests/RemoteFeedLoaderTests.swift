@@ -81,7 +81,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let item1 = FeedItem(id: UUID(),
                     description: nil,
                     location: nil,
-                    imageURL: URL(string: "http://a-url.com")!)
+                    imageUrl: URL(string: "http://a-url.com")!)
         
         let itemJSON = [
             "id": item1.id.uuidString,
@@ -92,7 +92,7 @@ class RemoteFeedLoaderTests: XCTestCase {
             id: UUID(),
             description: "a description",
             location: "a location",
-            imageURL: URL(string: "http://another-url-.com")!)
+            imageUrl: URL(string: "http://another-url-.com")!)
         
         let item2JSON = [
             "id": item2.id.uuidString,
@@ -105,7 +105,9 @@ class RemoteFeedLoaderTests: XCTestCase {
             "items": [itemJSON, item2JSON]
         ]
         
-        expect(sut, toCompleteWith: .success([item2,item1]), when: {
+        let items = [item1, item2]
+        
+        expect(sut, toCompleteWith: .success([item1, item2]), when: {
             let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
             client.complete(withStatusCode: 200, data: json)
         })
